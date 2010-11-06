@@ -88,7 +88,9 @@ GAME_OBJS = \
 
         #tetrahedron.o
 
-bspc : $(GAME_OBJS)
+EXEC = bspc
+
+$(EXEC): $(GAME_OBJS)
 	$(CC) $(CFLAGS) -o $@ $(GAME_OBJS) $(LDFLAGS)
 	strip $@
 
@@ -98,7 +100,7 @@ bspc : $(GAME_OBJS)
 #############################################################################
 
 clean:
-	-rm -f $(GAME_OBJS)
+	-rm -f $(GAME_OBJS) $(EXEC)
 
 depend:
 	gcc -MM $(GAME_OBJS:.o=.c)

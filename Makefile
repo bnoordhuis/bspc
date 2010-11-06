@@ -12,7 +12,7 @@ CC=gcc
 BASE_CFLAGS=-Dstricmp=strcasecmp
 
 #use these cflags to optimize it
-CFLAGS=$(BASE_CFLAGS) -Ideps -O3 -ffast-math -DLINUX -DBSPC
+CFLAGS=$(BASE_CFLAGS) -I. -Ideps -O3 -ffast-math -DLINUX -DBSPC
 #use these when debugging 
 #CFLAGS=$(BASE_CFLAGS) -g
 

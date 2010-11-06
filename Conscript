@@ -22,10 +22,10 @@ Import qw( BSPC_BASE_CFLAGS BUILD_DIR INSTALL_DIR CC CXX LINK );
 	deps/botlib/be_aas_sample.c
 	brushbsp.c
 	bspc.c
-	../qcommon/cm_load.c
-	../qcommon/cm_patch.c
-	../qcommon/cm_test.c
-	../qcommon/cm_trace.c
+	deps/qcommon/cm_load.c
+	deps/qcommon/cm_patch.c
+	deps/qcommon/cm_test.c
+	deps/qcommon/cm_trace.c
 	csg.c
 	glfile.c
 	l_bsp_ent.c
@@ -53,12 +53,12 @@ Import qw( BSPC_BASE_CFLAGS BUILD_DIR INSTALL_DIR CC CXX LINK );
 	map_q2.c
 	map_q3.c
 	map_sin.c
-	../qcommon/md4.c
+	deps/qcommon/md4.c
 	nodraw.c
 	portals.c
 	textures.c
 	tree.c
-	../qcommon/unzip.c
+	deps/qcommon/unzip.c
   );
 $BSPC_REF = \@BSPC_FILES;
 

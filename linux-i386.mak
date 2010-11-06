@@ -46,10 +46,10 @@ GAME_OBJS = \
 	deps/botlib/be_aas_sample.o\
 	brushbsp.o\
 	bspc.o\
-	../qcommon/cm_load.o\
-	../qcommon/cm_patch.o\
-	../qcommon/cm_test.o\
-	../qcommon/cm_trace.o\
+	deps/qcommon/cm_load.o\
+	deps/qcommon/cm_patch.o\
+	deps/qcommon/cm_test.o\
+	deps/qcommon/cm_trace.o\
 	csg.o\
 	glfile.o\
 	l_bsp_ent.o\
@@ -77,13 +77,13 @@ GAME_OBJS = \
 	map_q2.o\
 	map_q3.o\
 	map_sin.o\
-	../qcommon/md4.o\
+	deps/qcommon/md4.o\
 	nodraw.o\
 	portals.o\
 	tetrahedron.o\
 	textures.o\
 	tree.o\
-	../qcommon/unzip.o
+	deps/qcommon/unzip.o
 
 bspc$(ARCH) : $(GAME_OBJS)
 	$(CC) $(CFLAGS) -o $@ $(GAME_OBJS) $(LDFLAGS)

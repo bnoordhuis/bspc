@@ -5,7 +5,7 @@
 # TTimo 5/15/2001
 # some cleanup .. only used on i386 for GtkRadiant setups AFAIK .. removing the i386 tag
 # TODO: the intermediate object files should go into their own directory
-#   specially for deps/botlib and ../qcommon, the compilation flags on those might not be what you expect
+#   specially for deps/botlib and deps/qcommon, the compilation flags on those might not be what you expect
 
 #ARCH=i386
 CC=gcc
@@ -48,10 +48,10 @@ GAME_OBJS = \
 	deps/botlib/be_aas_sample.o\
 	brushbsp.o\
 	bspc.o\
-	../qcommon/cm_load.o\
-	../qcommon/cm_patch.o\
-	../qcommon/cm_test.o\
-	../qcommon/cm_trace.o\
+	deps/qcommon/cm_load.o\
+	deps/qcommon/cm_patch.o\
+	deps/qcommon/cm_test.o\
+	deps/qcommon/cm_trace.o\
 	csg.o\
 	glfile.o\
 	l_bsp_ent.o\
@@ -79,12 +79,12 @@ GAME_OBJS = \
 	map_q2.o\
 	map_q3.o\
 	map_sin.o\
-	../qcommon/md4.o\
+	deps/qcommon/md4.o\
 	nodraw.o\
 	portals.o\
 	textures.o\
 	tree.o\
-	../qcommon/unzip.o
+	deps/qcommon/unzip.o
 
         #tetrahedron.o
 

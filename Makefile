@@ -90,6 +90,8 @@ GAME_OBJS = \
 
 EXEC = bspc
 
+all:	$(EXEC)
+
 $(EXEC): $(GAME_OBJS)
 	$(CC) $(CFLAGS) -o $@ $(GAME_OBJS) $(LDFLAGS)
 	strip $@

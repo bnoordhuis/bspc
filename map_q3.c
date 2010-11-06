@@ -22,13 +22,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "qbsp.h"
 #include "l_mem.h"
-#include "../botlib/aasfile.h"	//aas_bbox_t
+#include "botlib/aasfile.h"	//aas_bbox_t
 #include "aas_store.h"			//AAS_MAX_BBOXES
 #include "aas_cfg.h"
 #include "aas_map.h"			//AAS_CreateMapBrushes
 #include "l_bsp_q3.h"
-#include "../qcommon/cm_patch.h"
-#include "../game/surfaceflags.h"
+#include "qcommon/cm_patch.h"
+#include "qcommon/surfaceflags.h"
 
 #define NODESTACKSIZE		1024
 

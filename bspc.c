@@ -33,9 +33,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 #include "qbsp.h"
 #include "l_mem.h"
-#include "../botlib/aasfile.h"
-#include "../botlib/be_aas_cluster.h"
-#include "../botlib/be_aas_optimize.h"
+#include "botlib/aasfile.h"
+#include "botlib/be_aas_cluster.h"
+#include "botlib/be_aas_optimize.h"
 #include "aas_create.h"
 #include "aas_store.h"
 #include "aas_file.h"

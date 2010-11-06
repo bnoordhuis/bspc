@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "l_mem.h"
 #include "l_log.h"
 #include "l_poly.h"
-#include "../botlib/l_script.h"
+#include "botlib/l_script.h"
 #include "l_qfiles.h"
 #include "l_bsp_q3.h"
 #include "l_bsp_ent.h"

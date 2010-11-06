@@ -1148,7 +1148,7 @@ void StripSingleQuotes(char *string)
 // Returns:					-
 // Changes Globals:		-
 //============================================================================
-long double ReadSignedFloat(script_t *script)
+float ReadSignedFloat(script_t *script)
 {
 	token_t token;
 	long double sign = 1;

@@ -111,7 +111,7 @@ void PrintContents(int contents)
 	} //end for
 } //end of the function PrintContents
 
-//#endif DEBUG
+//#endif
 
 //===========================================================================
 //

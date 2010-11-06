@@ -2772,7 +2772,7 @@ void AAS_Reachability_Teleport(void)
 			AAS_ValueForBSPEpairKey(ent, "model", model, MAX_EPAIRKEY);
 //#ifdef REACH_DEBUG
 			botimport.Print(PRT_MESSAGE, "trigger_multiple model = \"%s\"\n", model);
-//#endif REACH_DEBUG
+//#endif
 			VectorClear(angles);
 			AAS_BSPModelMinsMaxsOrigin(atoi(model+1), angles, mins, maxs, origin);
 			//
@@ -2809,7 +2809,7 @@ void AAS_Reachability_Teleport(void)
 			AAS_ValueForBSPEpairKey(ent, "model", model, MAX_EPAIRKEY);
 //#ifdef REACH_DEBUG
 			botimport.Print(PRT_MESSAGE, "trigger_teleport model = \"%s\"\n", model);
-//#endif REACH_DEBUG
+//#endif
 			VectorClear(angles);
 			AAS_BSPModelMinsMaxsOrigin(atoi(model+1), angles, mins, maxs, origin);
 			//
@@ -3544,7 +3544,7 @@ void AAS_Reachability_JumpPad(void)
 #ifdef REACH_DEBUG
 		botimport.Print(PRT_MESSAGE, "absmins = %f %f %f\n", absmins[0], absmins[1], absmins[2]);
 		botimport.Print(PRT_MESSAGE, "absmaxs = %f %f %f\n", absmaxs[0], absmaxs[1], absmaxs[2]);
-#endif REACH_DEBUG
+#endif
 		VectorAdd(absmins, absmaxs, origin);
 		VectorScale (origin, 0.5, origin);
 

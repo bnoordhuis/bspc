@@ -342,7 +342,7 @@ void AAS_CheckArea(tmp_area_t *tmparea)
 			Log_Write("AAS_CheckArea: area %d face %d: %s\r\n", tmparea->areanum,
 						face->num, WindingErrorString());
 		} //end if
-#endif L_DEBUG
+#endif
 
 		plane = &mapplanes[face->planenum ^ side];
 
@@ -363,7 +363,7 @@ void AAS_CheckArea(tmp_area_t *tmparea)
 			Log_Write("AAS_CheckArea: area %d face %d winding plane unequal to face plane\r\n",
 										tmparea->areanum, face->num);
 		} //end if
-#endif L_DEBUG
+#endif
 	} //end for
 } //end of the function AAS_CheckArea
 //===========================================================================

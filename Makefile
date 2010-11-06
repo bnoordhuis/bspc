@@ -9,7 +9,7 @@
 
 #ARCH=i386
 CC=gcc
-BASE_CFLAGS=-Dstricmp=strcasecmp
+BASE_CFLAGS=-Dstricmp=strcasecmp -DMAC_STATIC=
 
 #use these cflags to optimize it
 CFLAGS=$(BASE_CFLAGS) -I. -Ideps -O3 -ffast-math -DLINUX -DBSPC

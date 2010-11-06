@@ -38,12 +38,12 @@ GAME_OBJS = \
 	aas_prunenodes.o\
 	aas_store.o\
 	be_aas_bspc.o\
-	../botlib/be_aas_bspq3.o\
-	../botlib/be_aas_cluster.o\
-	../botlib/be_aas_move.o\
-	../botlib/be_aas_optimize.o\
-	../botlib/be_aas_reach.o\
-	../botlib/be_aas_sample.o\
+	deps/botlib/be_aas_bspq3.o\
+	deps/botlib/be_aas_cluster.o\
+	deps/botlib/be_aas_move.o\
+	deps/botlib/be_aas_optimize.o\
+	deps/botlib/be_aas_reach.o\
+	deps/botlib/be_aas_sample.o\
 	brushbsp.o\
 	bspc.o\
 	../qcommon/cm_load.o\
@@ -59,15 +59,15 @@ GAME_OBJS = \
 	l_bsp_q3.o\
 	l_bsp_sin.o\
 	l_cmd.o\
-	../botlib/l_libvar.o\
+	deps/botlib/l_libvar.o\
 	l_log.o\
 	l_math.o\
 	l_mem.o\
 	l_poly.o\
-	../botlib/l_precomp.o\
+	deps/botlib/l_precomp.o\
 	l_qfiles.o\
-	../botlib/l_script.o\
-	../botlib/l_struct.o\
+	deps/botlib/l_script.o\
+	deps/botlib/l_struct.o\
 	l_threads.o\
 	l_utils.o\
 	leakfile.o\

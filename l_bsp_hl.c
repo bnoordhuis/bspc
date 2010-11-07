@@ -681,7 +681,6 @@ Dumps info about current file
 */
 void HL_PrintBSPFileSizes(void)
 {
-	int	numtextures = hl_texdatasize ? ((hl_dmiptexlump_t*)hl_dtexdata)->nummiptex : 0;
 	int	totalmemory = 0;
 
 	qprintf("\n");

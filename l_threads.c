@@ -786,7 +786,6 @@ pthread_mutex_t my_mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_attr_t	attrib;
 sem_t semaphore;
 static int enter;
-static int numwaitingthreads = 0;
 
 
 //===========================================================================
@@ -847,8 +846,6 @@ void ThreadUnlock(void)
 //===========================================================================
 void ThreadSetupLock(void)
 {
-	pthread_mutexattr_t mattrib;
-
 	Log_Print("pthread multi-threading\n");
 
 	threaded = true;
@@ -921,8 +918,6 @@ void RunThreadsOn(int workcnt, qboolean showpacifier, void(*func)(int))
 	int		i;
 	pthread_t	work_threads[MAX_THREADS];
 	void *pthread_return;
-	pthread_attr_t	attrib;
-	pthread_mutexattr_t	mattrib;
 	int		start, end;
 
 	Log_Print("pthread multi-threading\n");

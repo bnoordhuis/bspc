@@ -98,17 +98,12 @@ $(EXEC)_g: $(GAME_OBJS)
 #############################################################################
 # MISC
 #############################################################################
+.PHONY: clean depend
 
 clean:
 	-rm -f $(GAME_OBJS) $(EXEC) $(EXEC)_g
 
 depend:
-	gcc -MM $(GAME_OBJS:.o=.c)
+	$(CC) $(CFLAGS) -MM $(GAME_OBJS:.o=.c) > .deps
 
-#install:
-#	cp bspci386 ..
-
-#
-# From "make depend"
-#
-
+include .deps

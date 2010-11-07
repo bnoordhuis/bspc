@@ -609,7 +609,6 @@ void AAS_ExpandMapBrush(mapbrush_t *brush, vec3_t mins, vec3_t maxs);
 void Q3_LoadMapFromBSP(struct quakefile_s *qf)
 {
 	int i;
-	vec3_t mins = {-1,-1,-1}, maxs = {1, 1, 1};
 
 	Log_Print("-- Q3_LoadMapFromBSP --\n");
 	//loaded map type

@@ -1,21 +1,11 @@
-#
-# Makefile for the BSPC tool for the Gladiator Bot
-# Intended for gcc/Linux
-#
-# TTimo 5/15/2001
-# some cleanup .. only used on i386 for GtkRadiant setups AFAIK .. removing the i386 tag
-# TODO: the intermediate object files should go into their own directory
-#   specially for deps/botlib and deps/qcommon, the compilation flags on those might not be what you expect
-
-#ARCH=i386
 CC=gcc
-BASE_CFLAGS=-Dstricmp=strcasecmp -DMAC_STATIC= -DQDECL= -DCom_Memcpy=memcpy -DCom_Memset=memset
+CFLAGS=\
+	-Dstricmp=strcasecmp -DCom_Memcpy=memcpy -DCom_Memset=memset \
+	-DMAC_STATIC= -DQDECL= -DLINUX -DBSPC \
+	-I. -Ideps
 
-#use these cflags to optimize it
-CFLAGS=$(BASE_CFLAGS) -I. -Ideps -O3 -ffast-math -DLINUX -DBSPC
-#use these when debugging 
-#CFLAGS=$(BASE_CFLAGS) -g
-
+RELEASE_CFLAGS=-O3 -ffast-math
+DEBUG_CFLAGS=-g -O0 -ffast-math
 LDFLAGS=-lm -lpthread
 
 DO_CC=$(CC) $(CFLAGS) -o $@ -c $<
@@ -90,12 +80,20 @@ GAME_OBJS = \
 
 EXEC = bspc
 
-all:	$(EXEC)
+all: release
+
+debug: CFLAGS += $(DEBUG_CFLAGS)
+debug: $(EXEC)_g
+
+release: CFLAGS += $(RELEASE_CFLAGS)
+release: $(EXEC)
 
 $(EXEC): $(GAME_OBJS)
-	$(CC) $(CFLAGS) -o $@ $(GAME_OBJS) $(LDFLAGS)
+	$(CC) $(LDFLAGS) -o $@ $(GAME_OBJS)
 	strip $@
 
+$(EXEC)_g: $(GAME_OBJS)
+	$(CC) $(LDFLAGS) -o $@ $(GAME_OBJS)
 
 #############################################################################
 # MISC

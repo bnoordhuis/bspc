@@ -16,7 +16,7 @@ CFLAGS=$(BASE_CFLAGS) -I. -Ideps -O3 -ffast-math -DLINUX -DBSPC
 #use these when debugging 
 #CFLAGS=$(BASE_CFLAGS) -g
 
-LDFLAGS=-ldl -lm -lpthread
+LDFLAGS=-lm -lpthread
 
 DO_CC=$(CC) $(CFLAGS) -o $@ -c $<
 

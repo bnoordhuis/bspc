@@ -830,7 +830,7 @@ qboolean WriteMapBrush(FILE *fp, mapbrush_t *brush, vec3_t origin)
 				//write the extra brush side info
 				if (loadedmaptype == MAPTYPE_QUAKE2)
 				{
-					if (fprintf(fp, " %ld %ld %ld", s->contents, ti->flags, ti->value) < 0) return false;
+					if (fprintf(fp, " %d %d %d", s->contents, ti->flags, ti->value) < 0) return false;
 				} //end if
 				//*/
 			} //end else

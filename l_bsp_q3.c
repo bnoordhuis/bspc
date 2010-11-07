@@ -265,7 +265,7 @@ void Q3_SurfacePlane(q3_dsurface_t *surface, vec3_t normal, float *dist)
 	//take the plane information from the lightmap vector
 	//VectorCopy(surface->lightmapVecs[2], normal);
 	//calculate plane dist with first surface vertex
-	//*dist = DotProduct(q3_drawVerts[surface->firstVert].xyz, normal);
+//	*dist = DotProduct(q3_drawVerts[surface->firstVert].xyz, normal);
 	Q3_PlaneFromPoints(q3_drawVerts[surface->firstVert].xyz,
 						q3_drawVerts[surface->firstVert+1].xyz,
 						q3_drawVerts[surface->firstVert+2].xyz, normal, dist);

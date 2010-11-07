@@ -100,7 +100,7 @@ $(EXEC)_g: $(GAME_OBJS)
 #############################################################################
 
 clean:
-	-rm -f $(GAME_OBJS) $(EXEC)
+	-rm -f $(GAME_OBJS) $(EXEC) $(EXEC)_g
 
 depend:
 	gcc -MM $(GAME_OBJS:.o=.c)

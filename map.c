@@ -908,7 +908,7 @@ qboolean WriteOriginBrush(FILE *fp, vec3_t origin)
 mapbrush_t *GetAreaPortalBrush(entity_t *mapent)
 {
 	int portalnum, bn;
-	mapbrush_t *brush;
+	mapbrush_t *brush = NULL;
 
 	//the area portal number
 	portalnum = mapent->areaportalnum;

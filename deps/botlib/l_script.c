@@ -74,6 +74,7 @@ typedef enum {qfalse, qtrue}	qboolean;
 #include "qbsp.h"
 #include "l_log.h"
 #include "l_mem.h"
+#include "l_cmd.h"
 
 #define qtrue	true
 #define qfalse	false
@@ -1425,9 +1426,5 @@ void FreeScript(script_t *script)
 //============================================================================
 void PS_SetBaseFolder(char *path)
 {
-#ifdef BSPC
-	sprintf(basefolder, path);
-#else
-	Com_sprintf(basefolder, sizeof(basefolder), path);
-#endif
+	Q_strncpyz(basefolder, path, sizeof(basefolder));
 } //end of the function PS_SetBaseFolder

@@ -63,6 +63,7 @@ char *strupr (char *in);
 char *strlower (char *in);
 int Q_strncasecmp (char *s1, char *s2, int n);
 int Q_strcasecmp (char *s1, char *s2);
+void Q_strncpyz( char *dest, const char *src, int destsize );
 void Q_getwd (char *out, size_t size);
 
 int Q_filelength (FILE *f);

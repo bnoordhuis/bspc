@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=\
 	-Dstricmp=strcasecmp -DCom_Memcpy=memcpy -DCom_Memset=memset \
-	-DMAC_STATIC= -DQDECL= -DLINUX -DBSPC \
+	-DMAC_STATIC= -DQDECL= -DLINUX -DBSPC -D_FORTIFY_SOURCE=2 \
 	-I. -Ideps -Wall
 
 RELEASE_CFLAGS=-O3 -ffast-math

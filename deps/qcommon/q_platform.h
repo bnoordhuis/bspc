@@ -83,6 +83,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define OS_STRING "win_msvc64"
 #elif defined __MINGW64__
 #define OS_STRING "win_mingw64"
+#else
+#define OS_STRING "win_unknown64"
 #endif
 
 #define ID_INLINE inline
@@ -92,6 +94,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define ARCH_STRING "x86_64"
 #elif defined _M_ALPHA
 #define ARCH_STRING "AXP"
+#else
+#define ARCH_STRING "unknown"
 #endif
 
 #define Q3_LITTLE_ENDIAN
@@ -107,6 +111,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define OS_STRING "win_msvc"
 #elif defined __MINGW32__
 #define OS_STRING "win_mingw"
+#else
+#define OS_STRING "win_unknown"
 #endif
 
 #define ID_INLINE __inline
@@ -116,6 +122,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define ARCH_STRING "x86"
 #elif defined _M_ALPHA
 #define ARCH_STRING "AXP"
+#else
+#define ARCH_STRING "unknown"
 #endif
 
 #define Q3_LITTLE_ENDIAN

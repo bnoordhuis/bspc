@@ -42,3 +42,7 @@ Straight from the source:
 ## Support
 
 [File a bug report](https://github.com/bnoordhuis/bspc/issues) if you run into issues.
+
+## License
+
+This program is licensed under the GNU Public License v2.0 and any later version.

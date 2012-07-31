@@ -22,4 +22,4 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 qboolean AAS_WriteAASFile(char *filename);
 qboolean AAS_LoadAASFile(char *filename, int fpoffset, int fplength);
-
+void AAS_ShowTotals(void);

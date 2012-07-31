@@ -89,11 +89,11 @@ release: CFLAGS += $(RELEASE_CFLAGS)
 release: $(EXEC)
 
 $(EXEC): $(GAME_OBJS)
-	$(CC) $(LDFLAGS) -o $@ $(GAME_OBJS)
+	$(CC) -o $@ $(GAME_OBJS) $(LDFLAGS)
 	strip $@
 
 $(EXEC)_g: $(GAME_OBJS)
-	$(CC) $(LDFLAGS) -o $@ $(GAME_OBJS)
+	$(CC) -o $@ $(GAME_OBJS) $(LDFLAGS)
 
 #############################################################################
 # MISC

@@ -664,8 +664,12 @@ void AddThread(void (*func)(int))
 		//
 		thread->threadid = currentthreadid;
 
-		if (pthread_create(&thread->thread, attrib, (pthread_startroutine_t)func, (pthread_addr_t)thread->threadid) == -1)
+		if (pthread_create(&thread->thread,
+		                   attrib,
+		                   (pthread_startroutine_t)func,
+		                   (pthread_addr_t)thread->threadid) == -1) {
 			Error ("pthread_create failed");
+		}
 
 		//add the thread to the end of the list
 		thread->next = NULL;
@@ -765,8 +769,11 @@ int GetNumThreads(void)
 
 #define	USED
 
+#include <stdint.h>
 #include <pthread.h>
 #include <semaphore.h>
+
+#define pthread_startroutine_t void *(*)(void *)
 
 typedef struct thread_s
 {
@@ -936,10 +943,14 @@ void RunThreadsOn(int workcnt, qboolean showpacifier, void(*func)(int))
 
 	for (i=0 ; i<numthreads ; i++)
 	{
-		if (pthread_create(&work_threads[i], NULL, (void *)func, (void *)i) == -1)
+		if (pthread_create(&work_threads[i],
+		                   NULL,
+		                   (pthread_startroutine_t)func,
+		                   (void *)(uintptr_t)i) == -1) {
 			Error ("pthread_create failed");
+		}
 	}
-		
+
 	for (i=0 ; i<numthreads ; i++)
 	{
 		if (pthread_join(work_threads[i], &pthread_return) == -1)
@@ -983,8 +994,12 @@ void AddThread(void (*func)(int))
 		//
 		thread->threadid = currentthreadid;
 
-		if (pthread_create(&thread->thread, NULL, (void *)func, (void *)thread->threadid) == -1)
+		if (pthread_create(&thread->thread,
+		                   NULL,
+		                   (pthread_startroutine_t)func,
+		                   (void *)(uintptr_t)thread->threadid) == -1) {
 			Error ("pthread_create failed");
+		}
 
 		//add the thread to the end of the list
 		thread->next = NULL;

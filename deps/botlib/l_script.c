@@ -554,8 +554,10 @@ int PS_ReadName(script_t *script, token_t *token)
 // Returns:					-
 // Changes Globals:		-
 //============================================================================
-void NumberValue(char *string, int subtype, unsigned long int *intvalue,
-															long double *floatvalue)
+void NumberValue(char *string,
+                 int subtype,
+                 unsigned long int *intvalue,
+                 float *floatvalue)
 {
 	unsigned long int dotfound = 0;
 

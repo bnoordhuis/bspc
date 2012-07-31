@@ -390,10 +390,6 @@ qboolean Q3_ParseBSPEntity(int entnum)
 {
 	entity_t *mapent;
 	char *model;
-	int startbrush, startsides;
-
-	startbrush = nummapbrushes;
-	startsides = nummapbrushsides;
 
 	mapent = &entities[entnum];//num_entities];
 	mapent->firstbrush = nummapbrushes;

@@ -86,6 +86,9 @@ typedef enum {qfalse, qtrue}	qboolean;
 #define qfalse	false
 #define Q_stricmp	stricmp
 
+#define Com_Memset memset
+#define Com_Memcpy memcpy
+
 #endif //BSPC
 
 #if defined(QUAKE) && !defined(BSPC)

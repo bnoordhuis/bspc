@@ -78,6 +78,10 @@ typedef enum {qfalse, qtrue}	qboolean;
 
 #define qtrue	true
 #define qfalse	false
+
+#define Com_Memset memset
+#define Com_Memcpy memcpy
+
 #endif //BSPC
 
 

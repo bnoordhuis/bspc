@@ -969,6 +969,7 @@ int main (int argc, char **argv)
 					} //end if
 					AAS_ShowTotals();
 				} //end for
+				break;
 			} //end case
 			default:
 			{

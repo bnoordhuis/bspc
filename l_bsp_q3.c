@@ -70,10 +70,13 @@ q3_dbrush_t		*q3_dbrushes;//[Q3_MAX_MAP_BRUSHES];
 int				q3_numbrushsides;
 q3_dbrushside_t	*q3_dbrushsides;//[Q3_MAX_MAP_BRUSHSIDES];
 
+int				q3r_numbrushsides;
+q3r_dbrushside_t	*q3r_dbrushsides;//[Q3_MAX_MAP_BRUSHSIDES];
+
 int				q3_numLightBytes;
 byte			*q3_lightBytes;//[Q3_MAX_MAP_LIGHTING];
 
-int				q3_numGridPoints;
+int				q3_numGridBytes;
 byte			*q3_gridData;//[Q3_MAX_MAP_LIGHTGRID];
 
 int				q3_numVisBytes;
@@ -82,11 +85,17 @@ byte			*q3_visBytes;//[Q3_MAX_MAP_VISIBILITY];
 int				q3_numDrawVerts;
 q3_drawVert_t	*q3_drawVerts;//[Q3_MAX_MAP_DRAW_VERTS];
 
+int				q3r_numDrawVerts;
+q3r_drawVert_t	*q3r_drawVerts;//[Q3_MAX_MAP_DRAW_VERTS];
+
 int				q3_numDrawIndexes;
 int				*q3_drawIndexes;//[Q3_MAX_MAP_DRAW_INDEXES];
 
 int				q3_numDrawSurfaces;
 q3_dsurface_t	*q3_drawSurfaces;//[Q3_MAX_MAP_DRAW_SURFS];
+
+int				q3r_numDrawSurfaces;
+q3r_dsurface_t	*q3r_drawSurfaces;//[Q3_MAX_MAP_DRAW_SURFS];
 
 int				q3_numFogs;
 q3_dfog_t		*q3_dfogs;//[Q3_MAX_MAP_FOGS];
@@ -138,7 +147,7 @@ void Q3_FreeMaxBSP(void)
 	q3_numLightBytes = 0;
 	if (q3_gridData) FreeMemory(q3_gridData);
 	q3_gridData = NULL;
-	q3_numGridPoints = 0;
+	q3_numGridBytes = 0;
 	if (q3_visBytes) FreeMemory(q3_visBytes);
 	q3_visBytes = NULL;
 	q3_numVisBytes = 0;
@@ -154,6 +163,15 @@ void Q3_FreeMaxBSP(void)
 	if (q3_dfogs) FreeMemory(q3_dfogs);
 	q3_dfogs = NULL;
 	q3_numFogs = 0;
+	if (q3r_dbrushsides) FreeMemory(q3r_dbrushsides);
+	q3r_dbrushsides = NULL;
+	q3r_numbrushsides = 0;
+	if (q3r_drawVerts) FreeMemory(q3r_drawVerts);
+	q3r_drawVerts = NULL;
+	q3r_numDrawVerts = 0;
+	if (q3r_drawSurfaces) FreeMemory(q3r_drawSurfaces);
+	q3r_drawSurfaces = NULL;
+	q3r_numDrawSurfaces = 0;
 } //end of the function Q3_FreeMaxBSP
 
 
@@ -584,12 +602,78 @@ void CountTriangles( void ) {
 
 /*
 =============
+Q3R_ConvertBSPData
+=============
+*/
+static void Q3R_ConvertBSPData(void)
+{
+	int i, j;
+
+	q3_numbrushsides = q3r_numbrushsides;
+	q3_dbrushsides = GetMemory(q3_numbrushsides * sizeof(q3_dbrushside_t));
+	for( i = 0; i < q3_numbrushsides; i++ ) {
+		q3_dbrushsides[i].planeNum = q3r_dbrushsides[i].planeNum;
+		q3_dbrushsides[i].shaderNum = q3r_dbrushsides[i].shaderNum;
+	}
+
+	q3_numDrawVerts = q3r_numDrawVerts;
+	q3_drawVerts = GetMemory(q3_numDrawVerts * sizeof(q3_drawVert_t));
+	for( i = 0; i < q3_numDrawVerts; i++ ) {
+		for( j = 0; j < 3; j++ ) {
+			q3_drawVerts[i].xyz[j] = q3r_drawVerts[i].xyz[j];
+			q3_drawVerts[i].normal[j] = q3r_drawVerts[i].normal[j];
+		}
+		for( j = 0; j < 2; j++ ) {
+			q3_drawVerts[i].st[j] = q3r_drawVerts[i].st[j];
+		}
+		for( j = 0; j < 2; j++ ) {
+			q3_drawVerts[i].lightmap[j] = q3r_drawVerts[i].lightmap[0][j];
+		}
+		for( j = 0; j < 4; j++ ) {
+			q3_drawVerts[i].color[j] = q3r_drawVerts[i].color[0][j];
+		}
+	}
+
+	q3_numDrawSurfaces = q3r_numDrawSurfaces;
+	q3_drawSurfaces = GetMemory(q3_numDrawSurfaces * sizeof(q3_dsurface_t));
+	for( i = 0; i < q3_numDrawSurfaces; i++ ) {
+		q3_drawSurfaces[i].shaderNum = q3r_drawSurfaces[i].shaderNum;
+		q3_drawSurfaces[i].fogNum = q3r_drawSurfaces[i].fogNum;
+		q3_drawSurfaces[i].surfaceType = q3r_drawSurfaces[i].surfaceType;
+
+		q3_drawSurfaces[i].firstVert = q3r_drawSurfaces[i].firstVert;
+		q3_drawSurfaces[i].numVerts = q3r_drawSurfaces[i].numVerts;
+
+		q3_drawSurfaces[i].firstIndex = q3r_drawSurfaces[i].firstIndex;
+		q3_drawSurfaces[i].numIndexes = q3r_drawSurfaces[i].numIndexes;
+
+		q3_drawSurfaces[i].lightmapNum = q3r_drawSurfaces[i].lightmapNum[0];
+		q3_drawSurfaces[i].lightmapX = q3r_drawSurfaces[i].lightmapXY[0][0];
+		q3_drawSurfaces[i].lightmapY = q3r_drawSurfaces[i].lightmapXY[0][1];
+		q3_drawSurfaces[i].lightmapWidth = q3r_drawSurfaces[i].lightmapWidth;
+		q3_drawSurfaces[i].lightmapHeight = q3r_drawSurfaces[i].lightmapHeight;
+
+		for( j = 0; j < 3; j++ ) {
+			q3_drawSurfaces[i].lightmapOrigin[j] = q3r_drawSurfaces[i].lightmapOrigin[j];
+			q3_drawSurfaces[i].lightmapVecs[0][j] = q3r_drawSurfaces[i].lightmapVecs[0][j];
+			q3_drawSurfaces[i].lightmapVecs[1][j] = q3r_drawSurfaces[i].lightmapVecs[1][j];
+			q3_drawSurfaces[i].lightmapVecs[2][j] = q3r_drawSurfaces[i].lightmapVecs[2][j];
+		}
+
+		q3_drawSurfaces[i].patchWidth = q3r_drawSurfaces[i].patchWidth;
+		q3_drawSurfaces[i].patchHeight = q3r_drawSurfaces[i].patchHeight;
+	}
+}
+
+/*
+=============
 Q3_LoadBSPFile
 =============
 */
 void	Q3_LoadBSPFile(struct quakefile_s *qf)
 {
 	q3_dheader_t	*header;
+	int raven;
 
 	// load the file header
 	//LoadFile(filename, (void **)&header, offset, length);
@@ -599,11 +683,21 @@ void	Q3_LoadBSPFile(struct quakefile_s *qf)
 	// swap the header
 	Q3_SwapBlock( (int *)header, sizeof(*header) );
 
-	if ( header->ident != Q3_BSP_IDENT && header->ident != QL_BSP_IDENT ) {
-		Error( "%s is not a IBSP file", qf->filename );
+	if ( header->ident != Q3_BSP_IDENT && header->ident != QL_BSP_IDENT && header->ident != QF_BSP_IDENT ) {
+		Error( "%s is not a IBSP or a FBSP file", qf->filename );
 	}
-	if ( header->version != Q3_BSP_VERSION && header->version != QL_BSP_VERSION ) {
-		Error( "%s is version %i, not (%i or %i)", qf->filename, header->version, Q3_BSP_VERSION, QL_BSP_VERSION );
+
+	if( header->ident == QF_BSP_IDENT ) {
+		if ( header->version != QF_BSP_VERSION ) {
+			Error( "%s is version %i, not %i", qf->filename, header->version, QF_BSP_VERSION );
+		}
+		raven = 1;
+	}
+	else {
+		if ( header->version != Q3_BSP_VERSION && header->version != QL_BSP_VERSION ) {
+			Error( "%s is version %i, not (%i or %i)", qf->filename, header->version, Q3_BSP_VERSION, QL_BSP_VERSION );
+		}
+		raven = 0;
 	}
 
 	q3_numShaders = Q3_CopyLump( header, Q3_LUMP_SHADERS, (void *) &q3_dshaders, sizeof(q3_dshader_t) );
@@ -614,22 +708,34 @@ void	Q3_LoadBSPFile(struct quakefile_s *qf)
 	q3_numleafsurfaces = Q3_CopyLump( header, Q3_LUMP_LEAFSURFACES, (void *) &q3_dleafsurfaces, sizeof(q3_dleafsurfaces[0]) );
 	q3_numleafbrushes = Q3_CopyLump( header, Q3_LUMP_LEAFBRUSHES, (void *) &q3_dleafbrushes, sizeof(q3_dleafbrushes[0]) );
 	q3_numbrushes = Q3_CopyLump( header, Q3_LUMP_BRUSHES, (void *) &q3_dbrushes, sizeof(q3_dbrush_t) );
-	q3_numbrushsides = Q3_CopyLump( header, Q3_LUMP_BRUSHSIDES, (void *) &q3_dbrushsides, sizeof(q3_dbrushside_t) );
-	q3_numDrawVerts = Q3_CopyLump( header, Q3_LUMP_DRAWVERTS, (void *) &q3_drawVerts, sizeof(q3_drawVert_t) );
-	q3_numDrawSurfaces = Q3_CopyLump( header, Q3_LUMP_SURFACES, (void *) &q3_drawSurfaces, sizeof(q3_dsurface_t) );
 	q3_numFogs = Q3_CopyLump( header, Q3_LUMP_FOGS, (void *) &q3_dfogs, sizeof(q3_dfog_t) );
 	q3_numDrawIndexes = Q3_CopyLump( header, Q3_LUMP_DRAWINDEXES, (void *) &q3_drawIndexes, sizeof(q3_drawIndexes[0]) );
+
+	if( raven ) {
+		q3r_numbrushsides = Q3_CopyLump( header, Q3_LUMP_BRUSHSIDES, (void *) &q3r_dbrushsides, sizeof(q3r_dbrushside_t) );
+		q3r_numDrawVerts = Q3_CopyLump( header, Q3_LUMP_DRAWVERTS, (void *) &q3r_drawVerts, sizeof(q3r_drawVert_t) );
+		q3r_numDrawSurfaces = Q3_CopyLump( header, Q3_LUMP_SURFACES, (void *) &q3r_drawSurfaces, sizeof(q3r_dsurface_t) );
+	}
+	else {
+		q3_numbrushsides = Q3_CopyLump( header, Q3_LUMP_BRUSHSIDES, (void *) &q3_dbrushsides, sizeof(q3_dbrushside_t) );
+		q3_numDrawVerts = Q3_CopyLump( header, Q3_LUMP_DRAWVERTS, (void *) &q3_drawVerts, sizeof(q3_drawVert_t) );
+		q3_numDrawSurfaces = Q3_CopyLump( header, Q3_LUMP_SURFACES, (void *) &q3_drawSurfaces, sizeof(q3_dsurface_t) );
+	}
 
 	q3_numVisBytes = Q3_CopyLump( header, Q3_LUMP_VISIBILITY, (void *) &q3_visBytes, 1 );
 	q3_numLightBytes = Q3_CopyLump( header, Q3_LUMP_LIGHTMAPS, (void *) &q3_lightBytes, 1 );
 	q3_entdatasize = Q3_CopyLump( header, Q3_LUMP_ENTITIES, (void *) &q3_dentdata, 1);
 
-	q3_numGridPoints = Q3_CopyLump( header, Q3_LUMP_LIGHTGRID, (void *) &q3_gridData, 8 );
+	q3_numGridBytes = Q3_CopyLump( header, Q3_LUMP_LIGHTGRID, (void *) &q3_gridData, 1 );
+
+	if( raven ) {
+		Q3R_ConvertBSPData();
+	}
 
 	CountTriangles();
 
 	FreeMemory( header );		// everything has been copied out
-		
+
 	// swap everything
 	Q3_SwapBSPFile();
 
@@ -692,14 +798,14 @@ void	Q3_WriteBSPFile( char *filename )
 	Q3_AddLump( bspfile, header, Q3_LUMP_SURFACES, q3_drawSurfaces, q3_numDrawSurfaces*sizeof(q3_dsurface_t) );
 	Q3_AddLump( bspfile, header, Q3_LUMP_VISIBILITY, q3_visBytes, q3_numVisBytes );
 	Q3_AddLump( bspfile, header, Q3_LUMP_LIGHTMAPS, q3_lightBytes, q3_numLightBytes );
-	Q3_AddLump( bspfile, header, Q3_LUMP_LIGHTGRID, q3_gridData, 8 * q3_numGridPoints );
+	Q3_AddLump( bspfile, header, Q3_LUMP_LIGHTGRID, q3_gridData, q3_numGridBytes );
 	Q3_AddLump( bspfile, header, Q3_LUMP_ENTITIES, q3_dentdata, q3_entdatasize );
 	Q3_AddLump( bspfile, header, Q3_LUMP_FOGS, q3_dfogs, q3_numFogs * sizeof(q3_dfog_t) );
 	Q3_AddLump( bspfile, header, Q3_LUMP_DRAWINDEXES, q3_drawIndexes, q3_numDrawIndexes * sizeof(q3_drawIndexes[0]) );
 	
 	fseek (bspfile, 0, SEEK_SET);
 	SafeWrite (bspfile, header, sizeof(q3_dheader_t));
-	fclose (bspfile);	
+	fclose (bspfile);
 }
 
 //============================================================================

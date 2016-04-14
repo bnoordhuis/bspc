@@ -434,6 +434,40 @@ void CMod_LoadBrushSides (lump_t *l)
 	}
 }
 
+/*
+=================
+CMod_LoadRBrushSides
+=================
+*/
+void CMod_LoadRBrushSides (lump_t *l)
+{
+	int				i;
+	cbrushside_t	*out;
+	drbrushside_t 	*in;
+	int				count;
+	int				num;
+
+	in = (void *)(cmod_base + l->fileofs);
+	if ( l->filelen % sizeof(*in) ) {
+		Com_Error (ERR_DROP, "MOD_LoadBmodel: funny lump size");
+	}
+	count = l->filelen / sizeof(*in);
+
+	cm.brushsides = Hunk_Alloc( ( BOX_SIDES + count ) * sizeof( *cm.brushsides ), h_high );
+	cm.numBrushSides = count;
+
+	out = cm.brushsides;	
+
+	for ( i=0 ; i<count ; i++, in++, out++) {
+		num = LittleLong( in->planeNum );
+		out->plane = &cm.planes[num];
+		out->shaderNum = LittleLong( in->shaderNum );
+		if ( out->shaderNum < 0 || out->shaderNum >= cm.numShaders ) {
+			Com_Error( ERR_DROP, "CMod_LoadBrushSides: bad shaderNum: %i", out->shaderNum );
+		}
+		out->surfaceFlags = cm.shaders[out->shaderNum].surfaceFlags;
+	}
+}
 
 /*
 =================
@@ -474,16 +508,76 @@ void CMod_LoadVisibility( lump_t *l ) {
 
 //==================================================================
 
+#define	MAX_PATCH_VERTS		1024
 
 /*
 =================
 CMod_LoadPatches
 =================
 */
-#define	MAX_PATCH_VERTS		1024
 void CMod_LoadPatches( lump_t *surfs, lump_t *verts ) {
 	drawVert_t	*dv, *dv_p;
 	dsurface_t	*in;
+	int			count;
+	int			i, j;
+	int			c;
+	cPatch_t	*patch;
+	vec3_t		points[MAX_PATCH_VERTS];
+	int			width, height;
+	int			shaderNum;
+
+	in = (void *)(cmod_base + surfs->fileofs);
+	if (surfs->filelen % sizeof(*in))
+		Com_Error (ERR_DROP, "MOD_LoadBmodel: funny lump size");
+	cm.numSurfaces = count = surfs->filelen / sizeof(*in);
+	cm.surfaces = Hunk_Alloc( cm.numSurfaces * sizeof( cm.surfaces[0] ), h_high );
+
+	dv = (void *)(cmod_base + verts->fileofs);
+	if (verts->filelen % sizeof(*dv))
+		Com_Error (ERR_DROP, "MOD_LoadBmodel: funny lump size");
+
+	// scan through all the surfaces, but only load patches,
+	// not planar faces
+	for ( i = 0 ; i < count ; i++, in++ ) {
+		if ( LittleLong( in->surfaceType ) != MST_PATCH ) {
+			continue;		// ignore other surfaces
+		}
+		// FIXME: check for non-colliding patches
+
+		cm.surfaces[ i ] = patch = Hunk_Alloc( sizeof( *patch ), h_high );
+
+		// load the full drawverts onto the stack
+		width = LittleLong( in->patchWidth );
+		height = LittleLong( in->patchHeight );
+		c = width * height;
+		if ( c > MAX_PATCH_VERTS ) {
+			Com_Error( ERR_DROP, "ParseMesh: MAX_PATCH_VERTS" );
+		}
+
+		dv_p = dv + LittleLong( in->firstVert );
+		for ( j = 0 ; j < c ; j++, dv_p++ ) {
+			points[j][0] = LittleFloat( dv_p->xyz[0] );
+			points[j][1] = LittleFloat( dv_p->xyz[1] );
+			points[j][2] = LittleFloat( dv_p->xyz[2] );
+		}
+
+		shaderNum = LittleLong( in->shaderNum );
+		patch->contents = cm.shaders[shaderNum].contentFlags;
+		patch->surfaceFlags = cm.shaders[shaderNum].surfaceFlags;
+
+		// create the internal facet structure
+		patch->pc = CM_GeneratePatchCollide( width, height, points );
+	}
+}
+
+/*
+=================
+CMod_LoadRPatches
+=================
+*/
+void CMod_LoadRPatches( lump_t *surfs, lump_t *verts ) {
+	rdrawVert_t	*dv, *dv_p;
+	drsurface_t	*in;
 	int			count;
 	int			i, j;
 	int			c;
@@ -572,6 +666,7 @@ void CM_LoadMap( const char *name, qboolean clientload, int *checksum ) {
 	dheader_t		header;
 	int				length;
 	static unsigned	last_checksum;
+	int             raven;
 
 	if ( !name || !name[0] ) {
 		Com_Error( ERR_DROP, "CM_LoadMap: NULL name" );
@@ -623,9 +718,19 @@ void CM_LoadMap( const char *name, qboolean clientload, int *checksum ) {
 		((int *)&header)[i] = LittleLong ( ((int *)&header)[i]);
 	}
 
-	if ( header.version != BSP_VERSION && header.version != BSP_VERSION_QL ) {
-		Com_Error (ERR_DROP, "CM_LoadMap: %s has wrong version number (%i should be %i)"
-		, name, header.version, BSP_VERSION );
+	if ( header.ident == BSP_IDENT_QF ) {
+		if ( header.version != BSP_VERSION_QF ) {
+			Com_Error (ERR_DROP, "CM_LoadMap: %s has wrong version number (%i should be %i)"
+			, name, header.version, BSP_VERSION_QF );
+		}
+		raven = 1;
+	} 
+	else {
+		if ( header.version != BSP_VERSION && header.version != BSP_VERSION_QL ) {
+			Com_Error (ERR_DROP, "CM_LoadMap: %s has wrong version number (%i should be %i or %i)"
+			, name, header.version, BSP_VERSION, BSP_VERSION_QL );
+		}
+		raven = 0;
 	}
 
 	cmod_base = (byte *)buf;
@@ -636,13 +741,22 @@ void CM_LoadMap( const char *name, qboolean clientload, int *checksum ) {
 	CMod_LoadLeafBrushes (&header.lumps[LUMP_LEAFBRUSHES]);
 	CMod_LoadLeafSurfaces (&header.lumps[LUMP_LEAFSURFACES]);
 	CMod_LoadPlanes (&header.lumps[LUMP_PLANES]);
-	CMod_LoadBrushSides (&header.lumps[LUMP_BRUSHSIDES]);
+	if( raven ) {
+		CMod_LoadRBrushSides (&header.lumps[LUMP_BRUSHSIDES]);
+	} else {
+		CMod_LoadBrushSides (&header.lumps[LUMP_BRUSHSIDES]);
+	}
 	CMod_LoadBrushes (&header.lumps[LUMP_BRUSHES]);
 	CMod_LoadSubmodels (&header.lumps[LUMP_MODELS]);
 	CMod_LoadNodes (&header.lumps[LUMP_NODES]);
 	CMod_LoadEntityString (&header.lumps[LUMP_ENTITIES]);
 	CMod_LoadVisibility( &header.lumps[LUMP_VISIBILITY] );
-	CMod_LoadPatches( &header.lumps[LUMP_SURFACES], &header.lumps[LUMP_DRAWVERTS] );
+	if( raven ) {
+		CMod_LoadRPatches( &header.lumps[LUMP_SURFACES], &header.lumps[LUMP_DRAWVERTS] );
+	}
+	else {
+		CMod_LoadPatches( &header.lumps[LUMP_SURFACES], &header.lumps[LUMP_DRAWVERTS] );
+	}
 
 	// we are NOT freeing the file, because it is cached for the ref
 	FS_FreeFile (buf);

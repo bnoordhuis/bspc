@@ -71,7 +71,7 @@ winding_t *AllocWinding (int points)
 	winding_t	*w;
 	int			s;
 
-	s = sizeof(vec_t)*3*points + sizeof(int);
+	s = sizeof(*w) + (points > 4 ? sizeof(vec3_t)*(points-4) : 0);
 	w = GetMemory(s);
 	memset(w, 0, s);
 

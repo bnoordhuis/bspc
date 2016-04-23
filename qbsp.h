@@ -85,7 +85,7 @@ typedef struct side_s
 	int				texinfo;		// texture reference
 	winding_t		*winding;	// winding of this side
 	struct side_s	*original;	// bspbrush_t sides will reference the mapbrush_t sides
-   int				lightinfo;	// for SIN only
+	int				lightinfo;	// for SIN only
 	int				contents;	// from miptex
 	int				surf;			// from miptex
 	unsigned short flags;		// side flags

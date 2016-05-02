@@ -76,6 +76,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #ifdef __WIN64__
 
+#undef MAC_STATIC
+#define MAC_STATIC
+
 #undef QDECL
 #define QDECL __cdecl
 

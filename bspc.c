@@ -427,8 +427,8 @@ void CreateAASFilesForAllBSPFiles(char *quakepath)
 	struct stat statbuf;
 	int j;
 #endif
-	char filter[_MAX_PATH], bspfilter[_MAX_PATH], aasfilter[_MAX_PATH];
-	char aasfile[_MAX_PATH], buf[_MAX_PATH], foldername[_MAX_PATH];
+	char filter[MAX_PATH], bspfilter[MAX_PATH], aasfilter[MAX_PATH];
+	char aasfile[MAX_PATH], buf[MAX_PATH], foldername[MAX_PATH];
 	quakefile_t *qf, *qf2, *files, *bspfiles, *aasfiles;
 
 	strcpy(filter, quakepath);
@@ -442,7 +442,7 @@ void CreateAASFilesForAllBSPFiles(char *quakepath)
 	{
 		_splitpath(filter, foldername, NULL, NULL, NULL);
 		_splitpath(filter, NULL, &foldername[strlen(foldername)], NULL, NULL);
-		AppendPathSeperator(foldername, _MAX_PATH);
+		AppendPathSeperator(foldername, MAX_PATH);
 		strcat(foldername, filedata.cFileName);
 		_stat(foldername, &statbuf);
 #else

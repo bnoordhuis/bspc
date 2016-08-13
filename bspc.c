@@ -271,8 +271,8 @@ quakefile_t *GetArgumentFiles(int argc, char *argv[], int *i, char *ext)
 int main (int argc, char **argv)
 {
 	int i, comp = 0;
-	char outputpath[MAX_PATH] = "";
-	char filename[MAX_PATH] = "unknown";
+	static char outputpath[MAX_PATH] = "";
+	static char filename[MAX_PATH] = "unknown";
 	quakefile_t *qfiles, *qf;
 	double start_time;
 

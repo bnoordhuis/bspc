@@ -46,12 +46,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define DF_AASENTCLIENT(x)		(x - aasworld.entities - 1)
 #define DF_CLIENTAASENT(x)		(&aasworld.entities[x + 1])
 
-/*
-#ifndef MAX_PATH
-	#define MAX_PATH				MAX_QPATH
-#endif
-*/
-
 //string index (for model, sound and image index)
 typedef struct aas_stringindex_s
 {

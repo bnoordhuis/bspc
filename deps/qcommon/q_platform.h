@@ -74,7 +74,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //================================================================= WIN64/32 ===
 
-#ifdef __WIN64__
+#ifdef _WIN64
 
 #undef MAC_STATIC
 #define MAC_STATIC
@@ -101,7 +101,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define DLL_EXT ".dll"
 
-#elif __WIN32__
+#elif _WIN32
 
 #undef MAC_STATIC
 #define MAC_STATIC

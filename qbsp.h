@@ -22,6 +22,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
 #if defined(WIN32) || defined(_WIN32)
+// Disable these: warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _stricmp. See online help for details.
+#pragma warning( disable: 4996 )
 #include <io.h>
 #endif
 #include <stdlib.h>
@@ -85,7 +87,7 @@ typedef struct side_s
 	int				texinfo;		// texture reference
 	winding_t		*winding;	// winding of this side
 	struct side_s	*original;	// bspbrush_t sides will reference the mapbrush_t sides
-   int				lightinfo;	// for SIN only
+	int				lightinfo;	// for SIN only
 	int				contents;	// from miptex
 	int				surf;			// from miptex
 	unsigned short flags;		// side flags
@@ -140,7 +142,7 @@ typedef struct bspbrush_s
 	int			side, testside;		// side of node during construction
 	mapbrush_t	*original;
 	int			numsides;
-	side_t		sides[6];			// variably sized
+	side_t		sides[];
 } bspbrush_t;	//sizeof(bspbrush_t) = 44 + numsides * sizeof(side_t)
 //bsp node
 typedef struct node_s

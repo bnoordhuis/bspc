@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "qcommon/unzip.h"
+#include "l_utils.h"
 
 #define QFILETYPE_UNKNOWN			0x8000
 #define QFILETYPE_PAK				0x0001
@@ -47,11 +48,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define QFILEEXT_WAV				".WAV"
 #define QFILEEXT_AAS				".AAS"
 
-//maximum path length
-#ifndef _MAX_PATH
-	#define _MAX_PATH				1024
-#endif
-
 //for Sin packs
 #define MAX_PAK_FILENAME_LENGTH 120
 #define SINPAKHEADER		(('K'<<24)+('A'<<16)+('P'<<8)+'S')
@@ -64,9 +60,9 @@ typedef struct
 
 typedef struct quakefile_s
 {
-	char pakfile[_MAX_PATH];
-	char filename[_MAX_PATH];
-	char origname[_MAX_PATH];
+	char pakfile[MAX_PATH];
+	char filename[MAX_PATH];
+	char origname[MAX_PATH];
 	int zipfile;
 	int type;
 	int offset;

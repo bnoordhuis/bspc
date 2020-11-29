@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{913cc37e-3865-45e3-b24b-304679879e9e}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\deps">
+      <UniqueIdentifier>{2b91ead6-bdd6-440c-a439-05cf88bf93e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{4d141e48-146e-49a4-a55e-40e94dfa6668}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{2382f020-e034-4f9c-a515-809ae178dc64}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="_files.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aas_areamerging.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aas_cfg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aas_create.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aas_edgemelting.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aas_facemerging.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aas_file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aas_gsubdiv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aas_map.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aas_prunenodes.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aas_store.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="be_aas_bspc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="brushbsp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bspc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="csg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="glfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_bsp_ent.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_bsp_hl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_bsp_q1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_bsp_q2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_bsp_q3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_bsp_sin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_cmd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_log.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_math.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_mem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_poly.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_qfiles.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_threads.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="leakfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map_hl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map_q1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map_q2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map_q3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map_sin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nodraw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="portals.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="textures.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\qcommon\unzip.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\botlib\be_aas_bspq3.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\botlib\be_aas_cluster.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\botlib\be_aas_move.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\botlib\be_aas_optimize.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\botlib\be_aas_reach.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\botlib\be_aas_sample.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\qcommon\cm_load.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\qcommon\cm_patch.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\qcommon\cm_test.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\qcommon\cm_trace.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\botlib\l_libvar.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\botlib\l_precomp.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\botlib\l_script.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\botlib\l_struct.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\qcommon\md4.c">
+      <Filter>Source Files\deps</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="aas_areamerging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aas_cfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aas_create.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aas_edgemelting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aas_facemerging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aas_file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aas_gsubdiv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aas_map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aas_prunenodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aas_store.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\aasfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_bsp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="be_aas_bspc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_cluster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_def.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_funcs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_move.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_optimize.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_reach.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_route.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_routealt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_aas_sample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\be_interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\game\bg_public.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cgame\cg_public.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\client\client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\qcommon\cm_local.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\qcommon\cm_patch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\qcommon\cm_polylib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\qcommon\cm_public.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ui\keycodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\client\keys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_bsp_ent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_bsp_hl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_bsp_q1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_bsp_q2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_bsp_q3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_bsp_sin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_cmd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\l_libvar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\l_log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_mem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\l_memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_poly.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\l_precomp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_qfiles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\l_script.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\botlib\l_struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_threads.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="l_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="q2files.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="q3files.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\game\q_shared.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="qbsp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\qcommon\qcommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\qcommon\qfiles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sinfiles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\client\snd_public.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\game\surfaceflags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer\tr_public.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cgame\tr_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ui\ui_public.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\qcommon\unzip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

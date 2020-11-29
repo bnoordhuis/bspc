@@ -402,9 +402,12 @@ typedef struct {
 
 #define BSP_IDENT	(('P'<<24)+('S'<<16)+('B'<<8)+'I')
 		// little-endian "IBSP"
+#define BSP_IDENT_QF	(('P'<<24)+('S'<<16)+('B'<<8)+'F')
+		// little-endian "IBSP"
 
 #define BSP_VERSION			46
 #define BSP_VERSION_QL			47 // quakelive :sss
+#define BSP_VERSION_QF			1 // qfusion
 
 // there shouldn't be any problem with increasing these values at the
 // expense of more memory allocation in the utilities
@@ -442,6 +445,8 @@ typedef struct {
 
 #define	LIGHTMAP_WIDTH		128
 #define	LIGHTMAP_HEIGHT		128
+
+#define MAX_LIGHTMAPS       4
 
 #define MAX_WORLD_COORD		( 128*1024 )
 #define MIN_WORLD_COORD		( -128*1024 )
@@ -526,6 +531,12 @@ typedef struct {
 } dbrushside_t;
 
 typedef struct {
+	int			planeNum;			// positive plane side faces out of the leaf
+	int			shaderNum;
+    int         surfaceNum;
+} drbrushside_t;
+
+typedef struct {
 	int			firstSide;
 	int			numSides;
 	int			shaderNum;		// the shader that determines the contents flags
@@ -544,6 +555,14 @@ typedef struct {
 	vec3_t		normal;
 	byte		color[4];
 } drawVert_t;
+
+typedef struct {
+	vec3_t		xyz;
+	float		st[2];
+	float		lightmap[MAX_LIGHTMAPS][2];
+	vec3_t		normal;
+	byte		color[MAX_LIGHTMAPS][4];
+} rdrawVert_t;
 
 #define drawVert_t_cleared(x) drawVert_t (x) = {{0, 0, 0}, {0, 0}, {0, 0}, {0, 0, 0}, {0, 0, 0, 0}}
 
@@ -577,5 +596,29 @@ typedef struct {
 	int			patchHeight;
 } dsurface_t;
 
+typedef struct {
+	int			shaderNum;
+	int			fogNum;
+	int			surfaceType;
+
+	int			firstVert;
+	int			numVerts;
+
+	int			firstIndex;
+	int			numIndexes;
+
+    unsigned char lightmapStyles[MAX_LIGHTMAPS];
+    unsigned char vertexStyles[MAX_LIGHTMAPS];
+
+	int			lightmapNum[MAX_LIGHTMAPS];
+	int			lightmapXY[MAX_LIGHTMAPS][2];
+	int			lightmapWidth, lightmapHeight;
+
+	vec3_t		lightmapOrigin;
+	vec3_t		lightmapVecs[3];	// for patches, [0] and [1] are lodbounds
+
+	int			patchWidth;
+	int			patchHeight;
+} drsurface_t;
 
 #endif

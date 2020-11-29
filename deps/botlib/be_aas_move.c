@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *****************************************************************************/
 
 #include "qcommon/q_shared.h"
+#include "l_utils.h"
 #include "l_memory.h"
 #include "l_script.h"
 #include "l_precomp.h"
@@ -168,7 +169,7 @@ int AAS_AgainstLadder(vec3_t origin)
 		//get the plane the face is in
 		plane = &aasworld.planes[face->planenum ^ side];
 		//if the origin is pretty close to the plane
-		if (abs(DotProduct(plane->normal, origin) - plane->dist) < 3)
+		if (fabs(DotProduct(plane->normal, origin) - plane->dist) < 3.0f)
 		{
 			if (AAS_PointInsideFace(abs(facenum), origin, 0.1f)) return qtrue;
 		} //end if

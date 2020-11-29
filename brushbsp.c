@@ -425,7 +425,7 @@ bspbrush_t *AllocBrush (int numsides)
 	bspbrush_t	*bb;
 	size_t		c;
 
-	c = offsetof(bspbrush_t, sides[numsides]);
+	c = sizeof(*bb) + sizeof(*bb->sides) * numsides;
 	bb = GetMemory(c);
 	memset (bb, 0, c);
 	if (numthreads == 1)
@@ -487,8 +487,8 @@ bspbrush_t *CopyBrush (bspbrush_t *brush)
 	bspbrush_t *newbrush;
 	size_t		size;
 	int			i;
-	
-	size = offsetof(bspbrush_t, sides[brush->numsides]);
+
+	size = sizeof(*newbrush) + sizeof(*brush->sides) * brush->numsides;
 
 	newbrush = AllocBrush (brush->numsides);
 	memcpy (newbrush, brush, size);
@@ -1016,10 +1016,10 @@ side_t *SelectSplitSide (bspbrush_t *brushes, node_t *node)
 				pnum = side->planenum;
 				pnum &= ~1;	// allways use positive facing plane
 
-				CheckPlaneAgainstParents (pnum, node);
-
 				if (!CheckPlaneAgainstVolume (pnum, node))
 					continue;	// would produce a tiny volume
+
+				CheckPlaneAgainstParents (pnum, node);
 
 				front = 0;
 				back = 0;

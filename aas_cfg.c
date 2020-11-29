@@ -20,8 +20,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
+#include <float.h>
+
 #include "qbsp.h"
-#include "float.h"
 #include "botlib/aasfile.h"
 #include "aas_store.h"
 #include "aas_cfg.h"
@@ -82,6 +83,7 @@ fielddef_t cfg_fields[] =
 	{"rs_startelevator", CFG_OFS(rs_startelevator), FT_FLOAT},
 	{"rs_falldamage5", CFG_OFS(rs_falldamage5), FT_FLOAT},
 	{"rs_falldamage10", CFG_OFS(rs_falldamage10), FT_FLOAT},
+	{"rs_maxfallheight", CFG_OFS(rs_maxfallheight), FT_FLOAT},
 	{"rs_maxjumpfallheight", CFG_OFS(rs_maxjumpfallheight), FT_FLOAT},
 	{NULL, 0, 0, 0}
 };

@@ -133,7 +133,7 @@ void Q1_AllocMaxBSP(void)
 	//edges
 	q1_numedges = 0;
 	q1_dedges = (q1_dedge_t *) GetMemory(Q1_MAX_MAP_EDGES * sizeof(q1_dedge_t));
-	q1_allocatedbspmem += Q1_MAX_MAP_EDGES, sizeof(q1_dedge_t);
+	q1_allocatedbspmem += Q1_MAX_MAP_EDGES * sizeof(q1_dedge_t);
 	//mark surfaces
 	q1_nummarksurfaces = 0;
 	q1_dmarksurfaces = (unsigned short *) GetMemory(Q1_MAX_MAP_MARKSURFACES * sizeof(unsigned short));
@@ -227,7 +227,7 @@ Byte swaps all data in a bsp file.
 */
 void Q1_SwapBSPFile (qboolean todisk)
 {
-	int i, j, c;
+	int i, j, k, c;
 	q1_dmodel_t *d;
 	q1_dmiptexlump_t *mtl;
 
@@ -277,8 +277,13 @@ void Q1_SwapBSPFile (qboolean todisk)
 //	
 	for (i=0 ; i<q1_numtexinfo ; i++)
 	{
-		for (j=0 ; j<8 ; j++)
-			q1_texinfo[i].vecs[0][j] = LittleFloat(q1_texinfo[i].vecs[0][j]);
+		for (j=0 ; j<2 ; j++)
+		{
+			for (k=0; k<4; k++)
+			{
+				q1_texinfo[i].vecs[j][k] = LittleFloat (q1_texinfo[i].vecs[j][k]);
+			}
+		}
 		q1_texinfo[i].miptex = LittleLong(q1_texinfo[i].miptex);
 		q1_texinfo[i].flags = LittleLong(q1_texinfo[i].flags);
 	}

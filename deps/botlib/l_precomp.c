@@ -86,6 +86,9 @@ typedef enum {qfalse, qtrue}	qboolean;
 #define qfalse	false
 #define Q_stricmp	stricmp
 
+#define Com_Memset memset
+#define Com_Memcpy memcpy
+
 #endif //BSPC
 
 #if defined(QUAKE) && !defined(BSPC)
@@ -1328,7 +1331,7 @@ define_t *PC_DefineFromString(char *string)
 	script = LoadScriptMemory(string, strlen(string), "*extern");
 	//create a new source
 	Com_Memset(&src, 0, sizeof(source_t));
-	strncpy(src.filename, "*extern", MAX_PATH);
+	strncpy(src.filename, "*extern", sizeof(src.filename) - 1);
 	src.scriptstack = script;
 #if DEFINEHASHING
 	src.definehash = GetClearedMemory(DEFINEHASHSIZE * sizeof(define_t *));
